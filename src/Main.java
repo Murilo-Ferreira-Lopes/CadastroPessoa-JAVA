@@ -10,6 +10,8 @@ import java.util.ArrayList;
 public class Main {
     public static void main(String[] args) {
         ArrayList<PessoaFisica> listaPF = new ArrayList<>();
+        ArrayList<PessoaJuridica> listaPJ = new ArrayList<>();
+        PessoaJuridica metodosPJ = new PessoaJuridica();
         PessoaFisica metodosPF = new PessoaFisica();
         JOptionPane.showMessageDialog(null, "Bem Vindo ao sistema de cadastro de pessoas fisicas e pessoas juridicas!");
         int op;
@@ -78,6 +80,56 @@ public class Main {
 
                     break;
                 case 2:
+                    JOptionPane.showMessageDialog(null, "Voce escolheu a opcao 2 - Pessoa Juridica\n");
+                    int opPJ;
+                    do{
+                        opPJ=Integer.parseInt(JOptionPane.showInputDialog("Selecione uma opcao:\n1-Cadastrar Pessoa Juridica\n2-Listar Pessoa Juridica\n0-Voltar"));
+                        switch (opPJ){
+                            case 1:
+                                PessoaJuridica novaPJ = new PessoaJuridica();
+                                Endereco novoEndPJ = new Endereco();
+                                novaPJ.nome=JOptionPane.showInputDialog("Digite o nome da Pessoa Juridica");
+                                novaPJ.cnpj=JOptionPane.showInputDialog("Digite o CNPJ");
+                                novaPJ.rendimento=Integer.parseInt(JOptionPane.showInputDialog("Digite o rendimento mensal (Digite somente Numeros)"));
+                                novaPJ.razaoSocial=JOptionPane.showInputDialog("Digite a Razao Social");
+                                novoEndPJ.logradouro=JOptionPane.showInputDialog("Digite o Logradouro");
+                                novoEndPJ.numero=JOptionPane.showInputDialog("Digite o Numero");
+                                String endCom;
+                                endCom= String.valueOf(JOptionPane.showConfirmDialog(null, "O endereco e Comercial?", "Selecione uma Opcao", JOptionPane.YES_NO_OPTION));
+                                if (endCom.equalsIgnoreCase("0")){
+                                    novoEndPJ.enderecoComercial = true;
+                                }else {
+                                    novoEndPJ.enderecoComercial = false;
+                                }
+                                novaPJ.endereco = novoEndPJ;
+                                listaPJ.add(novaPJ);
+                                JOptionPane.showMessageDialog(null, "Cadastro Realizado com Sucesso!!!");
+                                break;
+                            case 2:
+                                if(listaPJ.size() > 0){
+                                    for (PessoaJuridica cadaPJ : listaPJ){
+                                        JOptionPane.showMessageDialog(null,
+                                                "Nome: "+cadaPJ.nome +
+                                                        "\nCNPJ: "+ cadaPJ.cnpj+
+                                                        "\nEndereco: "+cadaPJ.endereco.logradouro+", "+ cadaPJ.endereco.numero +
+                                                        "\nRazao Social: "+ cadaPJ.razaoSocial+
+                                                        "\nImposto a ser Pago: R$" + metodosPJ.calcularImposto(cadaPJ.rendimento));
+
+                                    }
+                                    opPJ = Integer.parseInt(JOptionPane.showInputDialog("Digite 0 para continuar"));
+                                }else{
+                                    JOptionPane.showMessageDialog(null, "Nao ha Pessoas Juridicas cadastradas!");
+                                }
+                                break;
+                            case 0:
+                                JOptionPane.showMessageDialog(null, "Voltando ao menu anterior");
+                                break;
+                            default:
+                                JOptionPane.showMessageDialog(null, "Valor nao encontrado, por favor coloque um valor valido ");
+                                break;
+
+                        }
+                    }while(opPJ != 0);
                     break;
                 case 0:
                     JOptionPane.showMessageDialog(null, "Obrigado por usar nosso Sistema!!!");

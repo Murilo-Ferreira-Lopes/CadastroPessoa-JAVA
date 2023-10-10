@@ -8,13 +8,13 @@ public class PessoaFisica extends Pessoa{
         if(rendimento <= 1500){
             return 0;
         } else if (rendimento > 1500 && rendimento <= 3500) {
-            float resultado = rendimento * 0.2f;
+            float resultado = (rendimento / 100) * 2;
             return resultado;
         } else if (rendimento > 3500 && rendimento <=6000) {
-            float resultado = rendimento * 3.5f;
+            float resultado = (rendimento / 100) * 3.5f;
             return resultado;
         }else{
-            float resultado = rendimento * 0.6f;
+            float resultado = (rendimento / 100) * 6;
             return resultado;
         }
     }
